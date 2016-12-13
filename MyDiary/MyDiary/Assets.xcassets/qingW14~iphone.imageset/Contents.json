@@ -2,12 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "empty_failed.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "empty_failed@2x.png",
+      "filename" : "qingW14~iphone@2x.png",
       "scale" : "2x"
     },
     {

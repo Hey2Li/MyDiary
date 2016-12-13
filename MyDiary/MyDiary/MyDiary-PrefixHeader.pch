@@ -9,6 +9,8 @@
 #ifndef MyDiary_PrefixHeader_pch
 #define MyDiary_PrefixHeader_pch
 
+#import <Masonry.h>
+
 #define kScreenWidth ([[UIScreen mainScreen] bounds].size.width)
 #define kScreenHeight ([[UIScreen mainScreen] bounds].size.height)
 
