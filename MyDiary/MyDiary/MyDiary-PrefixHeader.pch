@@ -13,7 +13,7 @@
 
 #define kScreenWidth ([[UIScreen mainScreen] bounds].size.width)
 #define kScreenHeight ([[UIScreen mainScreen] bounds].size.height)
-
+#define kBlueColor [UIColor colorWithRed:91/255.0 green:183/255.0 blue:228/255.0 alpha:1];
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 

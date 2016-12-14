@@ -8,6 +8,7 @@
 
 #import "HomeViewController.h"
 #import "HomeTableViewCell.h"
+#import "DiaryViewController.h"
 
 @interface HomeViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *myTableView;
@@ -16,6 +17,9 @@
 
 @implementation HomeViewController
 
+- (void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBar.hidden = YES;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -23,9 +27,6 @@
     [self initWithView];
 }
 - (void)initWithNavi{
-//    self.title = @"MyDiary";
-    self.navigationController.navigationBar.hidden = YES;
-    
     UIView *naviView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 84)];
     [naviView setBackgroundColor:[UIColor colorWithRed:91/255.0 green:183/255.0 blue:228/255.0 alpha:1]];
     [self.view addSubview:naviView];
@@ -100,6 +101,13 @@
             return cell;
             break;
     }
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self.navigationController pushViewController:[DiaryViewController new] animated:YES];
+}
+- (void)viewWillDisappear:(BOOL)animated{
+    self.navigationController.navigationBar.hidden = NO;
+
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
