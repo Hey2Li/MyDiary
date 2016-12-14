@@ -2,11 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "diaryInfopen.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "qingW14~iphone@2x.png",
+      "filename" : "diaryInfopen@2x.png",
       "scale" : "2x"
     },
     {

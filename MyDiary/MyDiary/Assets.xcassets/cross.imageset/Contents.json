@@ -1,16 +1,17 @@
 {
   "images" : [
     {
-      "idiom" : "iphone",
-      "filename" : "qingM14~iphone.png",
+      "idiom" : "universal",
+      "filename" : "cross.png",
       "scale" : "1x"
     },
     {
-      "idiom" : "iphone",
+      "idiom" : "universal",
+      "filename" : "cross@2x.png",
       "scale" : "2x"
     },
     {
-      "idiom" : "iphone",
+      "idiom" : "universal",
       "scale" : "3x"
     }
   ],
