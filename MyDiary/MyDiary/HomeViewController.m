@@ -7,6 +7,7 @@
 //
 
 #import "HomeViewController.h"
+#import "HomeTableViewCell.h"
 
 @interface HomeViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *myTableView;
@@ -17,11 +18,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor grayColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     [self initWithNavi];
+    [self initWithView];
 }
 - (void)initWithNavi{
-    self.title = @"MyDiary";
+//    self.title = @"MyDiary";
     self.navigationController.navigationBar.hidden = YES;
     
     UIView *naviView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 84)];
@@ -36,7 +38,7 @@
     [naviView addSubview:headBtn];
     [headBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(naviView.mas_left).offset(10);
-        make.top.equalTo(naviView.mas_top).offset(30);
+        make.top.equalTo(naviView.mas_top).offset(25);
         make.width.equalTo(@50);
         make.height.equalTo(headBtn.mas_width);
     }];
@@ -54,6 +56,7 @@
 }
 - (void)initWithView{
     UITableView *tableView = [UITableView new];
+    tableView.backgroundColor = [UIColor whiteColor];
     tableView.separatorStyle = NO;
     tableView.delegate = self;
     tableView.dataSource = self;
@@ -61,7 +64,7 @@
     [tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_left);
         make.right.equalTo(self.view.mas_right);
-        make.top.equalTo(self.naviView.mas_bottom);
+        make.top.equalTo(self.view.mas_top).offset(84);
         make.bottom.equalTo(self.view.mas_bottom);
     }];
     self.myTableView = tableView;
@@ -69,8 +72,34 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 3;
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 60;
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    if (cell == nil) {
+        cell = [[HomeTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+    }
+    switch (indexPath.row) {
+        case 0:
+            cell.iconImageView.image  =[UIImage imageNamed:@"Phone_call2"];
+            cell.titleLabel.text = @"紧急联系人";
+            return cell;
+            break;
+        case 1:
+            cell.iconImageView.image  =[UIImage imageNamed:@"Book_open2"];
+            cell.titleLabel.text = @"DIARY";
+            return cell;
+            break;
+        case 2:
+            cell.iconImageView.image  =[UIImage imageNamed:@"exclamation_point2"];
+            cell.titleLabel.text = @"禁止事项";
+            return cell;
+            break;
+        default:
+            return cell;
+            break;
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

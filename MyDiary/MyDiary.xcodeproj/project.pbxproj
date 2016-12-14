@@ -19,6 +19,8 @@
 		1C1BA41B1DFFD5FD00D9F95F /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1BA41A1DFFD5FD00D9F95F /* HomeViewController.m */; };
 		1C1BA41E1DFFD69C00D9F95F /* BaseNaviViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1BA41D1DFFD69C00D9F95F /* BaseNaviViewController.m */; };
 		1C1BA4221DFFEB2300D9F95F /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1BA4211DFFEB2300D9F95F /* HomeTableViewCell.m */; };
+		1C1BA4231E00E8DF00D9F95F /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1C1BA40B1DFFCE6600D9F95F /* OpenSans-Light.ttf */; };
+		1C1BA4241E00E93A00D9F95F /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1C1BA40D1DFFCE6600D9F95F /* OpenSans-Regular.ttf */; };
 		B4858310D690B183ECE14CEA /* libPods-MyDiary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46C73CCB5F9BAB8A1D784788 /* libPods-MyDiary.a */; };
 /* End PBXBuildFile section */
 
@@ -371,6 +373,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C1BA4241E00E93A00D9F95F /* OpenSans-Regular.ttf in Resources */,
+				1C1BA4231E00E8DF00D9F95F /* OpenSans-Light.ttf in Resources */,
 				1C1BA3DF1DFFCDCF00D9F95F /* LaunchScreen.storyboard in Resources */,
 				1C1BA3DC1DFFCDCF00D9F95F /* Assets.xcassets in Resources */,
 				1C1BA3DA1DFFCDCF00D9F95F /* Main.storyboard in Resources */,
