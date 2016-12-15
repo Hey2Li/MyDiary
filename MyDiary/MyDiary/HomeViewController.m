@@ -60,6 +60,7 @@
     tableView.backgroundColor = [UIColor whiteColor];
     tableView.separatorStyle = NO;
     tableView.delegate = self;
+    
     tableView.dataSource = self;
     [self.view addSubview:tableView];
     [tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -69,6 +70,45 @@
         make.bottom.equalTo(self.view.mas_bottom);
     }];
     self.myTableView = tableView;
+    
+    UIView *bottomSearchView = [UIView new];
+    bottomSearchView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:bottomSearchView];
+    [bottomSearchView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view.mas_left);
+        make.right.equalTo(self.view.mas_right);
+        make.bottom.equalTo(self.view.mas_bottom);
+        make.height.equalTo(@50);
+    }];
+    
+    UITextField *searchTextfiled = [[UITextField alloc]init];
+    [bottomSearchView addSubview:searchTextfiled];
+    [searchTextfiled mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(bottomSearchView.mas_centerY);
+        make.left.equalTo(bottomSearchView.mas_left).offset(10);
+        make.right.equalTo(bottomSearchView.mas_right).offset(-50);
+        make.height.equalTo(@28);
+    }];
+
+    searchTextfiled.backgroundColor = kBlueColor;
+    [searchTextfiled.layer setCornerRadius:5.0f];
+    UIImageView *leftView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 28, 18)];
+    leftView.image = [UIImage imageNamed:@"guideSearch"];
+    leftView.contentMode = UIViewContentModeCenter;
+    searchTextfiled.leftView = leftView;
+    searchTextfiled.leftViewMode = UITextFieldViewModeAlways;
+    searchTextfiled.tintColor = [UIColor whiteColor];
+    
+    UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [addBtn setImage:[UIImage imageNamed:@"setting_64px"] forState:UIControlStateNormal];
+    addBtn.contentMode = UIViewContentModeCenter;
+    [bottomSearchView addSubview:addBtn];
+    [addBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(bottomSearchView.mas_right).offset(-10);
+        make.centerY.equalTo(bottomSearchView.mas_centerY);
+        make.height.equalTo(@30);
+        make.width.equalTo(@30);
+    }];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 3;
