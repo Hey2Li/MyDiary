@@ -112,7 +112,7 @@
     }];
     
     UILabel *entryLabel = [UILabel new];
-    entryLabel.text = @"0 entry";
+    entryLabel.text = @"1 entry";
     entryLabel.textColor = [UIColor whiteColor];
     entryLabel.textAlignment = NSTextAlignmentCenter;
     entryLabel.font = [UIFont boldSystemFontOfSize:20];
@@ -157,7 +157,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UILabel *label = [UILabel new];
     label.backgroundColor = [UIColor clearColor];
-    label.text = @"11";
+    label.text = @"14";
     label.textColor = [UIColor whiteColor];
     label.textAlignment = NSTextAlignmentCenter;
     label.font = [UIFont systemFontOfSize:32];

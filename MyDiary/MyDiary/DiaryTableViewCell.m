@@ -13,14 +13,15 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    self.selectionStyle = NO;
     [self.layer setCornerRadius:5];
     self.layer.shadowOffset = CGSizeMake(0, 1);
     self.layer.shadowColor = [UIColor grayColor].CGColor;
     self.layer.shadowRadius = 1;
     self.layer.shadowOpacity = .5f;
     CGRect shadowFrame = self.layer.bounds;
-    CGPathRef shadowPath = [UIBezierPath
-                            bezierPathWithRect:shadowFrame].CGPath;
+    shadowFrame.size.width = kScreenWidth - 40;
+    CGPathRef shadowPath = [UIBezierPath bezierPathWithRect:shadowFrame].CGPath;
     self.layer.shadowPath = shadowPath;
     for (UILabel *label in self.contentView.subviews) {
         if ([label isKindOfClass:[UILabel class]]) {
