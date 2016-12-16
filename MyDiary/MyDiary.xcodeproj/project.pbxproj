@@ -152,12 +152,11 @@
 			children = (
 				1C1BA4161DFFD5DB00D9F95F /* Home */,
 				1C1BA4101DFFD59900D9F95F /* Diary */,
+				1C1BA42C1E0290C700D9F95F /* Base */,
 				1C1BA3D21DFFCDCF00D9F95F /* AppDelegate.h */,
 				1C1BA3D31DFFCDCF00D9F95F /* AppDelegate.m */,
 				1C1BA3D51DFFCDCF00D9F95F /* ViewController.h */,
 				1C1BA3D61DFFCDCF00D9F95F /* ViewController.m */,
-				1C1BA41C1DFFD69C00D9F95F /* BaseNaviViewController.h */,
-				1C1BA41D1DFFD69C00D9F95F /* BaseNaviViewController.m */,
 				1C1BA3D81DFFCDCF00D9F95F /* Main.storyboard */,
 				1C1BA3DB1DFFCDCF00D9F95F /* Assets.xcassets */,
 				1C1BA3DD1DFFCDCF00D9F95F /* LaunchScreen.storyboard */,
@@ -261,6 +260,15 @@
 				1C1BA41A1DFFD5FD00D9F95F /* HomeViewController.m */,
 			);
 			name = ViewController;
+			sourceTree = "<group>";
+		};
+		1C1BA42C1E0290C700D9F95F /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				1C1BA41C1DFFD69C00D9F95F /* BaseNaviViewController.h */,
+				1C1BA41D1DFFD69C00D9F95F /* BaseNaviViewController.m */,
+			);
+			name = Base;
 			sourceTree = "<group>";
 		};
 		BE5C815063D8D59275ED0473 /* Pods */ = {

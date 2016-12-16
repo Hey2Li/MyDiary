@@ -9,7 +9,6 @@
 #import "AppDelegate.h"
 #import "BaseNaviViewController.h"
 #import "HomeViewController.h"
-#import <IQKeyboardManager/IQKeyboardManager.h>
 @interface AppDelegate ()
 
 @end
@@ -22,14 +21,6 @@
     [_window makeKeyAndVisible];
     _window.backgroundColor = [UIColor whiteColor];
     _window.rootViewController = [[BaseNaviViewController alloc]initWithRootViewController:[HomeViewController new]];
-    
-    IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
-    manager.enable = YES;
-    manager.shouldResignOnTouchOutside = YES;
-    manager.shouldToolbarUsesTextFieldTintColor = YES;
-    manager.enableAutoToolbar = YES;
-
-    
     return YES;
 }
 

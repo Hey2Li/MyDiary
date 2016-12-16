@@ -10,9 +10,10 @@
 #import "HomeTableViewCell.h"
 #import "DiaryViewController.h"
 
-@interface HomeViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface HomeViewController ()<UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 @property (nonatomic, strong) UITableView *myTableView;
 @property (nonatomic, strong) UIView *naviView;
+@property (nonatomic, strong) UIView *bottomSearchView;
 @end
 
 @implementation HomeViewController
@@ -25,6 +26,15 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self initWithNavi];
     [self initWithView];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+     
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                                selector:@selector(keyboardWillHide:)
+                                                    name:UIKeyboardWillHideNotification
+                                                  object:nil];
 }
 - (void)initWithNavi{
     UIView *naviView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 84)];
@@ -80,8 +90,10 @@
         make.bottom.equalTo(self.view.mas_bottom);
         make.height.equalTo(@50);
     }];
+    self.bottomSearchView = bottomSearchView;
     
     UITextField *searchTextfiled = [[UITextField alloc]init];
+    searchTextfiled.delegate = self;
     [bottomSearchView addSubview:searchTextfiled];
     [searchTextfiled mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(bottomSearchView.mas_centerY);
@@ -109,6 +121,40 @@
         make.height.equalTo(@30);
         make.width.equalTo(@30);
     }];
+}
+- (void)keyboardWillShow:(NSNotification*)notification{
+    CGRect keyboardFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGFloat height = keyboardFrame.size.height;
+    NSNumber *duration = [notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSNumber *curve = [notification.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey];
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    [UIView setAnimationDuration:[duration doubleValue]];
+    [UIView setAnimationCurve:[curve intValue]];
+    [UIView setAnimationDelegate:self];
+//    [UIView commitAnimations];
+    [self.bottomSearchView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.view.mas_bottom).offset(-height);
+    }];
+
+}
+- (void)keyboardWillHide:(NSNotification *)notification{
+    NSNumber *duration = [notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSNumber *curve = [notification.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey];
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    [UIView setAnimationDuration:[duration doubleValue]];
+    [UIView setAnimationCurve:[curve intValue]];
+//    [UIView commitAnimations];
+    [self.bottomSearchView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.view.mas_bottom);
+    }];
+
+}
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:UIKeyboardWillHideNotification];
+    [[NSNotificationCenter defaultCenter]removeObserver:UIKeyboardDidShowNotification];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 3;
