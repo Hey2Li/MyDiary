@@ -8,6 +8,7 @@
 
 #import "DiaryViewController.h"
 #import "DiaryTableViewCell.h"
+#import "EditDiaryViewController.h"
 
 @interface DiaryViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UISegmentedControl *segControl;
@@ -169,6 +170,10 @@
     cell.titleLabel.text = @"君の名は。";
     cell.detailLabel.text = @"你的名字";
     return cell;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    EditDiaryViewController *vc = [EditDiaryViewController new];
+    [self presentViewController:vc animated:YES completion:nil];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
