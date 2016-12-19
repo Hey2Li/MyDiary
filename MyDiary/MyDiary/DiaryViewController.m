@@ -173,6 +173,7 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     EditDiaryViewController *vc = [EditDiaryViewController new];
+    vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [self presentViewController:vc animated:YES completion:nil];
 }
 - (void)didReceiveMemoryWarning {
