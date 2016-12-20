@@ -9,7 +9,7 @@
 #import "EditDiaryViewController.h"
 #import "DiaryViewController.h"
 
-@interface EditDiaryViewController ()
+@interface EditDiaryViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @end
 
@@ -96,7 +96,48 @@
         make.height.equalTo(weekLabel.mas_height);
         make.top.equalTo(weekLabel.mas_top);
     }];
-}
+    
+    UIButton *weatherBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage *image = [UIImage imageNamed:@"qingM14"];
+    image = [image imageWithRenderingMode: UIImageRenderingModeAlwaysTemplate];
+    weatherBtn.tintColor = [UIColor whiteColor];
+    [weatherBtn setImage:image forState:UIControlStateNormal];
+    [weatherBtn setTitle:@"晴" forState:UIControlStateNormal];
+    weatherBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+    [maskView addSubview:weatherBtn];
+    [weatherBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(dateLabel.mas_left);
+        make.right.equalTo(dateLabel.mas_centerX);
+        make.height.equalTo(@20);
+        make.top.equalTo(weekLabel.mas_bottom);
+    }];
+    
+    UIButton *addressBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [addressBtn setImage:[UIImage imageNamed:@"smallLocation"] forState:UIControlStateNormal];
+    [addressBtn setTitle:@"南京市秦淮区" forState:UIControlStateNormal];
+    addressBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+    [maskView addSubview:addressBtn];
+    [addressBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(weatherBtn.mas_right);
+        make.width.equalTo(@100);
+        make.height.equalTo(weatherBtn.mas_height);
+        make.top.equalTo(weatherBtn.mas_top);
+    }];
+    
+    UITableView *myTableView = [UITableView new];
+    myTableView.backgroundColor =[UIColor whiteColor];
+    myTableView.delegate = self;
+    myTableView.dataSource = self;
+    myTableView.separatorStyle = NO;
+    [maskView addSubview:myTableView];
+    [myTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(maskView.mas_left);
+        make.right.equalTo(maskView.mas_right);
+        make.top.equalTo(addressBtn.mas_bottom);
+        make.bottom.equalTo(maskView.mas_bottom).offset(-50);
+    }];
+} 
+
 - (void)backBtn{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
