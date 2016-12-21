@@ -124,19 +124,28 @@
         make.top.equalTo(weatherBtn.mas_top);
     }];
     
-    UITableView *myTableView = [UITableView new];
-    myTableView.backgroundColor =[UIColor whiteColor];
-    myTableView.delegate = self;
-    myTableView.dataSource = self;
-    myTableView.separatorStyle = NO;
-    [maskView addSubview:myTableView];
-    [myTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+//    UITableView *myTableView = [UITableView new];
+//    myTableView.backgroundColor =[UIColor whiteColor];
+//    myTableView.delegate = self;
+//    myTableView.dataSource = self;
+//    myTableView.separatorStyle = NO;
+//    [maskView addSubview:myTableView];
+//    [myTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(maskView.mas_left);
+//        make.right.equalTo(maskView.mas_right);
+//        make.top.equalTo(addressBtn.mas_bottom);
+//        make.bottom.equalTo(maskView.mas_bottom).offset(-50);
+//    }];
+    UITextView *textView = [UITextView new];
+    textView.backgroundColor = [UIColor whiteColor];
+    [maskView addSubview:textView];
+    [textView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(maskView.mas_left);
         make.right.equalTo(maskView.mas_right);
         make.top.equalTo(addressBtn.mas_bottom);
         make.bottom.equalTo(maskView.mas_bottom).offset(-50);
     }];
-} 
+}
 
 - (void)backBtn{
     [self dismissViewControllerAnimated:YES completion:nil];
