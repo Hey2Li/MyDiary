@@ -8,17 +8,68 @@
 
 #import "EditDiaryViewController.h"
 #import "DiaryViewController.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface EditDiaryViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface EditDiaryViewController ()<CLLocationManagerDelegate>
+{
+    CLLocationManager *_locationManager;
+}
+@property (nonatomic, strong) UIButton *addressBtn;
+@property (nonatomic, strong) UILabel *timeLabel;
+@property (nonatomic, strong) UILabel *dateLabel;
+@property (nonatomic, strong) UILabel *weekLabel;
+@property (nonatomic, strong) UILabel *monthLabel;
+@property (nonatomic, strong) NSArray *monthArray;
 
 @end
 
 @implementation EditDiaryViewController
-
+- (NSArray *)monthArray {
+    
+    if (_monthArray == nil) {
+        _monthArray = [NSArray arrayWithObjects:@"January",@"February",@"March",@"April",@"May",@"June",@"July",@"August",@"September",@"October",@"November",@"December", nil];
+    }
+    return _monthArray;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self initWithView];
+    [self initLocationService];
+    [self initWithDate];
+}
+- (void)initWithDate{
+    NSDate *date = [NSDate date];
+    self.dateLabel.text = [NSString stringWithFormat:@"%ld",(long)[self day:date]];
+    self.monthLabel.text = [self montn:date];
+    self.weekLabel.text = [self weekday:date];
+    self.timeLabel.text = [self time:date];
+}
+//当前月份
+- (NSString *)montn:(NSDate *)date{
+    NSDateComponents *components = [[NSCalendar currentCalendar]components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:date];
+    return self.monthArray[[components month] - 1];
+}
+//当前天数
+- (NSInteger)day:(NSDate *)date{
+    NSDateComponents *components = [[NSCalendar currentCalendar]components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:date];
+    return [components day];
+}
+//当前周
+- (NSString *)weekday:(NSDate *)date{
+    NSCalendar *calender = [NSCalendar currentCalendar];
+    [calender setFirstWeekday:1];
+    NSDateComponents *components = [calender components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:date];
+    [components setDay:[self day:date]];
+    NSDate *firstDayOfMonth = [calender dateFromComponents:components];
+    NSUInteger firstWeekday = [calender ordinalityOfUnit:NSCalendarUnitWeekday inUnit:NSCalendarUnitWeekOfMonth forDate:firstDayOfMonth];
+    return @[@"Sunday",@"Monday",@"Tuesday",@"Wednesday",@"Thursday",@"Friday",@"Saturday"][firstWeekday - 1];
+}
+//当前时间
+- (NSString *)time:(NSDate *)date{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"HH:mm"];
+    return [formatter stringFromDate:date];
 }
 - (void)initWithView{
     self.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];
@@ -57,6 +108,7 @@
         make.height.equalTo(@20);
         make.width.equalTo(@100);
     }];
+    self.monthLabel = monthLabel;
     
     UILabel *dateLabel = [UILabel new];
     dateLabel.text = @"15";
@@ -70,6 +122,7 @@
         make.width.equalTo(@100);
         make.top.equalTo(monthLabel.mas_bottom);
     }];
+    self.dateLabel = dateLabel;
     
     UILabel *weekLabel = [UILabel new];
     weekLabel.text = @"Thursday";
@@ -83,6 +136,7 @@
         make.height.equalTo(@20);
         make.top.equalTo(dateLabel.mas_bottom);
     }];
+    self.weekLabel = weekLabel;
     
     UILabel *timeLabel = [UILabel new];
     timeLabel.text = @"16:33";
@@ -96,6 +150,7 @@
         make.height.equalTo(weekLabel.mas_height);
         make.top.equalTo(weekLabel.mas_top);
     }];
+    self.timeLabel = timeLabel;
     
     UIButton *weatherBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage *image = [UIImage imageNamed:@"qingM14"];
@@ -123,6 +178,7 @@
         make.height.equalTo(weatherBtn.mas_height);
         make.top.equalTo(weatherBtn.mas_top);
     }];
+    self.addressBtn = addressBtn;
     
 //    UITableView *myTableView = [UITableView new];
 //    myTableView.backgroundColor =[UIColor whiteColor];
@@ -145,8 +201,98 @@
         make.top.equalTo(addressBtn.mas_bottom);
         make.bottom.equalTo(maskView.mas_bottom).offset(-50);
     }];
+    
+    UIButton *moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [moreBtn setImage:[UIImage imageNamed:@"diaryInfomore"] forState:UIControlStateNormal];
+    [maskView addSubview:moreBtn];
+    [moreBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(maskView.mas_left);
+        make.top.equalTo(textView.mas_bottom);
+        make.bottom.equalTo(maskView.mas_bottom);
+        make.width.equalTo(@((kScreenWidth - 60)/3));
+    }];
+    
+    UIButton *writeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [writeBtn setImage:[UIImage imageNamed:@"diaryInfopen"] forState:UIControlStateNormal];
+    [maskView addSubview:writeBtn];
+    [writeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(moreBtn.mas_right);
+        make.top.equalTo(moreBtn.mas_top);
+        make.bottom.equalTo(moreBtn.mas_bottom);
+        make.width.equalTo(moreBtn.mas_width);
+    }];
+    
+    UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [shareBtn setImage:[UIImage imageNamed:@"diaryInfoshare"] forState:UIControlStateNormal];
+    [maskView addSubview:shareBtn];
+    [shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(writeBtn.mas_right);
+        make.right.equalTo(maskView.mas_right);
+        make.top.equalTo(writeBtn.mas_top);
+        make.bottom.equalTo(writeBtn.mas_bottom);
+    }];
 }
+- (void)initLocationService{
+    _locationManager = [[CLLocationManager alloc]init];
+    _locationManager.delegate = self;
+    _locationManager.desiredAccuracy = kCLLocationAccuracyBest;//精确到米
+    if ([CLLocationManager locationServicesEnabled]) {
+        // 启动位置更新
+        // 开启位置更新需要与服务器进行轮询所以会比较耗电，在不需要时用stopUpdatingLocation方法关闭;
+        [_locationManager startUpdatingLocation];
+        NSLog(@"开启成功");
+    } else {
+        NSLog(@"请开启定位功能！");
+    }
+    if ([[[UIDevice currentDevice]systemVersion] doubleValue] >8.0)
+    {
+        // 设置定位权限仅iOS8以上有意义,而且iOS8以上必须添加此行代码
+        [_locationManager requestWhenInUseAuthorization];//前台定位
+    }
 
+}
+#pragma mark LoactionDelegate
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations{
+    CLLocation *location = locations.lastObject;
+    CLGeocoder *geocoder = [[CLGeocoder alloc]init];
+    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        if (placemarks.count > 0) {
+            CLPlacemark *placemark = [placemarks objectAtIndex:0];
+            NSLog(@"%@",placemark.name);
+            //获取城市
+            NSString *city = placemark.locality;
+            if (!city) {
+                //四大直辖市的城市信息无法通过locality获取，只能通过获取省份的方法来获得（如果city为空则是直辖市）
+                city = placemark.administrativeArea;
+            }
+            //位置名
+            NSLog(@"name:%@",placemark.name);
+            //区
+            NSLog(@"subLocality:%@",placemark.subLocality);
+            [self.addressBtn setTitle:[NSString stringWithFormat:@"%@%@",city,placemark.subLocality] forState:UIControlStateNormal];
+            [manager stopUpdatingLocation];
+        }else if (error == nil && [placemarks count] == 0){
+            NSLog(@"No results were returned");
+        }else if (error != nil){
+            NSLog(@"An error occurred = %@",error);
+        }
+    }];
+}
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
+    if ([error code] == kCLErrorDenied){
+        //访问被拒绝
+        NSLog(@"访问被拒绝");
+    }
+    if ([error code] == kCLErrorLocationUnknown) {
+        //无法获取位置信息
+        NSLog(@"无法获取位置信息");
+    }
+}
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [_locationManager stopUpdatingLocation];
+
+}
 - (void)backBtn{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
