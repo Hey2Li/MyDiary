@@ -25,6 +25,7 @@
 		1C1BA42B1E0130FB00D9F95F /* DiaryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C1BA4291E0130FB00D9F95F /* DiaryTableViewCell.xib */; };
 		1C1BA42F1E03C7DB00D9F95F /* EditDiaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1BA42E1E03C7DB00D9F95F /* EditDiaryViewController.m */; };
 		1C4211F51E0B9BEF00C0A6A9 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C4211F41E0B9BEF00C0A6A9 /* MapKit.framework */; };
+		1C4211F81E0BD0D700C0A6A9 /* Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C4211F71E0BD0D700C0A6A9 /* Tool.m */; };
 		B4858310D690B183ECE14CEA /* libPods-MyDiary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46C73CCB5F9BAB8A1D784788 /* libPods-MyDiary.a */; };
 /* End PBXBuildFile section */
 
@@ -91,6 +92,8 @@
 		1C1BA42D1E03C7DB00D9F95F /* EditDiaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditDiaryViewController.h; sourceTree = "<group>"; };
 		1C1BA42E1E03C7DB00D9F95F /* EditDiaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditDiaryViewController.m; sourceTree = "<group>"; };
 		1C4211F41E0B9BEF00C0A6A9 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		1C4211F61E0BD0D700C0A6A9 /* Tool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tool.h; sourceTree = "<group>"; };
+		1C4211F71E0BD0D700C0A6A9 /* Tool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tool.m; sourceTree = "<group>"; };
 		3C142C5C0E710D632F061A80 /* Pods-MyDiary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyDiary.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyDiary/Pods-MyDiary.release.xcconfig"; sourceTree = "<group>"; };
 		46C73CCB5F9BAB8A1D784788 /* libPods-MyDiary.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MyDiary.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EAE9C78F47F3662B9F61213 /* Pods-MyDiary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyDiary.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyDiary/Pods-MyDiary.debug.xcconfig"; sourceTree = "<group>"; };
@@ -192,6 +195,8 @@
 				1C1BA4071DFFCE5D00D9F95F /* Merriweather-Regular.ttf */,
 				1C1BA3D01DFFCDCF00D9F95F /* main.m */,
 				1C1BA41F1DFFD7F200D9F95F /* MyDiary-PrefixHeader.pch */,
+				1C4211F61E0BD0D700C0A6A9 /* Tool.h */,
+				1C4211F71E0BD0D700C0A6A9 /* Tool.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -487,6 +492,7 @@
 				1C1BA41E1DFFD69C00D9F95F /* BaseNaviViewController.m in Sources */,
 				1C1BA3D71DFFCDCF00D9F95F /* ViewController.m in Sources */,
 				1C1BA42A1E0130FB00D9F95F /* DiaryTableViewCell.m in Sources */,
+				1C4211F81E0BD0D700C0A6A9 /* Tool.m in Sources */,
 				1C1BA3D41DFFCDCF00D9F95F /* AppDelegate.m in Sources */,
 				1C1BA4221DFFEB2300D9F95F /* HomeTableViewCell.m in Sources */,
 				1C1BA41B1DFFD5FD00D9F95F /* HomeViewController.m in Sources */,

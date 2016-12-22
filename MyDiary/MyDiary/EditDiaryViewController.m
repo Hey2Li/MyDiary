@@ -39,37 +39,11 @@
     [self initWithDate];
 }
 - (void)initWithDate{
-    NSDate *date = [NSDate date];
-    self.dateLabel.text = [NSString stringWithFormat:@"%ld",(long)[self day:date]];
-    self.monthLabel.text = [self montn:date];
-    self.weekLabel.text = [self weekday:date];
-    self.timeLabel.text = [self time:date];
-}
-//当前月份
-- (NSString *)montn:(NSDate *)date{
-    NSDateComponents *components = [[NSCalendar currentCalendar]components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:date];
-    return self.monthArray[[components month] - 1];
-}
-//当前天数
-- (NSInteger)day:(NSDate *)date{
-    NSDateComponents *components = [[NSCalendar currentCalendar]components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:date];
-    return [components day];
-}
-//当前周
-- (NSString *)weekday:(NSDate *)date{
-    NSCalendar *calender = [NSCalendar currentCalendar];
-    [calender setFirstWeekday:1];
-    NSDateComponents *components = [calender components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:date];
-    [components setDay:[self day:date]];
-    NSDate *firstDayOfMonth = [calender dateFromComponents:components];
-    NSUInteger firstWeekday = [calender ordinalityOfUnit:NSCalendarUnitWeekday inUnit:NSCalendarUnitWeekOfMonth forDate:firstDayOfMonth];
-    return @[@"Sunday",@"Monday",@"Tuesday",@"Wednesday",@"Thursday",@"Friday",@"Saturday"][firstWeekday - 1];
-}
-//当前时间
-- (NSString *)time:(NSDate *)date{
-    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"HH:mm"];
-    return [formatter stringFromDate:date];
+    self.dateLabel.text = [NSString stringWithFormat:@"%ld",(long)[Tool day]];
+    self.monthLabel.text = [Tool montn];
+    self.weekLabel.text = [Tool weekday];
+    self.timeLabel.text = [Tool time];
+    [Tool ]
 }
 - (void)initWithView{
     self.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];
