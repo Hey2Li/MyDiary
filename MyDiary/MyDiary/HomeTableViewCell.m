@@ -34,7 +34,7 @@
         nameLabel.text = @"禁止事项";
         nameLabel.textColor = [UIColor colorWithRed:137/255.0 green:153/255.0 blue:165/255.0 alpha:1];
 //        [nameLabel setFont:[UIFont systemFontOfSize:16]];
-        nameLabel.font = [UIFont fontWithName:@"OpenSans-Regular" size:15];
+        nameLabel.font = [UIFont fontWithName:@"OpenSans-Regular" size:14];
         [self addSubview:nameLabel];
         [nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(leftImageView.mas_right).offset(10);
