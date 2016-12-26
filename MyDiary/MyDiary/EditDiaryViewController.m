@@ -9,6 +9,7 @@
 #import "EditDiaryViewController.h"
 #import "DiaryViewController.h"
 #import <CoreLocation/CoreLocation.h>
+#import "MDHTTPManager.h"
 
 @interface EditDiaryViewController ()<CLLocationManagerDelegate>
 {
@@ -20,17 +21,12 @@
 @property (nonatomic, strong) UILabel *weekLabel;
 @property (nonatomic, strong) UILabel *monthLabel;
 @property (nonatomic, strong) NSArray *monthArray;
+@property (nonatomic, strong) UIButton *weatherBtn;
 
 @end
 
 @implementation EditDiaryViewController
-- (NSArray *)monthArray {
-    
-    if (_monthArray == nil) {
-        _monthArray = [NSArray arrayWithObjects:@"January",@"February",@"March",@"April",@"May",@"June",@"July",@"August",@"September",@"October",@"November",@"December", nil];
-    }
-    return _monthArray;
-}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -92,7 +88,7 @@
     [dateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(monthLabel.mas_centerX);
         make.height.equalTo(@100);
-        make.width.equalTo(@100);
+        make.width.equalTo(@(kScreenWidth/2));
         make.top.equalTo(monthLabel.mas_bottom);
     }];
     self.dateLabel = dateLabel;
@@ -126,7 +122,7 @@
     self.timeLabel = timeLabel;
     
     UIButton *weatherBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *image = [UIImage imageNamed:@"qingM14"];
+    UIImage *image = [UIImage imageNamed:@"yuM14"];
     image = [image imageWithRenderingMode: UIImageRenderingModeAlwaysTemplate];
     weatherBtn.tintColor = [UIColor whiteColor];
     [weatherBtn setImage:image forState:UIControlStateNormal];
@@ -139,6 +135,7 @@
         make.height.equalTo(@20);
         make.top.equalTo(weekLabel.mas_bottom);
     }];
+    self.weatherBtn = weatherBtn;
     
     UIButton *addressBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [addressBtn setImage:[UIImage imageNamed:@"smallLocation"] forState:UIControlStateNormal];
@@ -153,13 +150,27 @@
     }];
     self.addressBtn = addressBtn;
     
+    UITextField *titleTextfiled = [[UITextField alloc]init];
+    titleTextfiled.font = [UIFont systemFontOfSize:24];
+    titleTextfiled.textColor = kBlueColor;
+    titleTextfiled.backgroundColor = [UIColor whiteColor];
+    titleTextfiled.textAlignment = NSTextAlignmentCenter;
+    [maskView addSubview:titleTextfiled];
+    [titleTextfiled mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(maskView.mas_left);
+        make.right.equalTo(maskView.mas_right);
+        make.top.equalTo(addressBtn.mas_bottom);
+        make.height.equalTo(@50);
+    }];
+    
     UITextView *textView = [UITextView new];
+    textView.font = [UIFont systemFontOfSize:18];
     textView.backgroundColor = [UIColor whiteColor];
     [maskView addSubview:textView];
     [textView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(maskView.mas_left);
         make.right.equalTo(maskView.mas_right);
-        make.top.equalTo(addressBtn.mas_bottom);
+        make.top.equalTo(titleTextfiled.mas_bottom);
         make.bottom.equalTo(maskView.mas_bottom).offset(-50);
     }];
     
@@ -226,6 +237,10 @@
                 //四大直辖市的城市信息无法通过locality获取，只能通过获取省份的方法来获得（如果city为空则是直辖市）
                 city = placemark.administrativeArea;
             }
+            [MDHTTPManager GetLocationWeatherWithLocation:city complete:^(LTHttpResult result, NSString *message, id data) {
+                NSDictionary *dic = data[@"results"][0][@"now"];
+                [self.weatherBtn setTitle:dic[@"text"] forState:UIControlStateNormal];
+            }];
             //位置名
             NSLog(@"name:%@",placemark.name);
             //区

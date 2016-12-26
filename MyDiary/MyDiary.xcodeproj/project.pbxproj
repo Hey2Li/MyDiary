@@ -26,6 +26,8 @@
 		1C1BA42F1E03C7DB00D9F95F /* EditDiaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1BA42E1E03C7DB00D9F95F /* EditDiaryViewController.m */; };
 		1C4211F51E0B9BEF00C0A6A9 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C4211F41E0B9BEF00C0A6A9 /* MapKit.framework */; };
 		1C4211F81E0BD0D700C0A6A9 /* Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C4211F71E0BD0D700C0A6A9 /* Tool.m */; };
+		1C4211FC1E0E86FD00C0A6A9 /* LTHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C4211FB1E0E86FD00C0A6A9 /* LTHTTPSessionManager.m */; };
+		1C4211FF1E0E875E00C0A6A9 /* MDHTTPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C4211FE1E0E875E00C0A6A9 /* MDHTTPManager.m */; };
 		B4858310D690B183ECE14CEA /* libPods-MyDiary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46C73CCB5F9BAB8A1D784788 /* libPods-MyDiary.a */; };
 /* End PBXBuildFile section */
 
@@ -94,6 +96,10 @@
 		1C4211F41E0B9BEF00C0A6A9 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		1C4211F61E0BD0D700C0A6A9 /* Tool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tool.h; sourceTree = "<group>"; };
 		1C4211F71E0BD0D700C0A6A9 /* Tool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tool.m; sourceTree = "<group>"; };
+		1C4211FA1E0E86FD00C0A6A9 /* LTHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTHTTPSessionManager.h; sourceTree = "<group>"; };
+		1C4211FB1E0E86FD00C0A6A9 /* LTHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTHTTPSessionManager.m; sourceTree = "<group>"; };
+		1C4211FD1E0E875E00C0A6A9 /* MDHTTPManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDHTTPManager.h; sourceTree = "<group>"; };
+		1C4211FE1E0E875E00C0A6A9 /* MDHTTPManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDHTTPManager.m; sourceTree = "<group>"; };
 		3C142C5C0E710D632F061A80 /* Pods-MyDiary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyDiary.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyDiary/Pods-MyDiary.release.xcconfig"; sourceTree = "<group>"; };
 		46C73CCB5F9BAB8A1D784788 /* libPods-MyDiary.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MyDiary.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EAE9C78F47F3662B9F61213 /* Pods-MyDiary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyDiary.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyDiary/Pods-MyDiary.debug.xcconfig"; sourceTree = "<group>"; };
@@ -160,6 +166,7 @@
 		1C1BA3CE1DFFCDCF00D9F95F /* MyDiary */ = {
 			isa = PBXGroup;
 			children = (
+				1C4211F91E0E86AC00C0A6A9 /* NetWork */,
 				1C1BA4161DFFD5DB00D9F95F /* Home */,
 				1C1BA4101DFFD59900D9F95F /* Diary */,
 				1C1BA42C1E0290C700D9F95F /* Base */,
@@ -283,6 +290,17 @@
 				1C1BA41D1DFFD69C00D9F95F /* BaseNaviViewController.m */,
 			);
 			name = Base;
+			sourceTree = "<group>";
+		};
+		1C4211F91E0E86AC00C0A6A9 /* NetWork */ = {
+			isa = PBXGroup;
+			children = (
+				1C4211FA1E0E86FD00C0A6A9 /* LTHTTPSessionManager.h */,
+				1C4211FB1E0E86FD00C0A6A9 /* LTHTTPSessionManager.m */,
+				1C4211FD1E0E875E00C0A6A9 /* MDHTTPManager.h */,
+				1C4211FE1E0E875E00C0A6A9 /* MDHTTPManager.m */,
+			);
+			name = NetWork;
 			sourceTree = "<group>";
 		};
 		BE5C815063D8D59275ED0473 /* Pods */ = {
@@ -487,7 +505,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C4211FC1E0E86FD00C0A6A9 /* LTHTTPSessionManager.m in Sources */,
 				1C1BA42F1E03C7DB00D9F95F /* EditDiaryViewController.m in Sources */,
+				1C4211FF1E0E875E00C0A6A9 /* MDHTTPManager.m in Sources */,
 				1C1BA4151DFFD5D100D9F95F /* DiaryViewController.m in Sources */,
 				1C1BA41E1DFFD69C00D9F95F /* BaseNaviViewController.m in Sources */,
 				1C1BA3D71DFFCDCF00D9F95F /* ViewController.m in Sources */,

@@ -10,6 +10,7 @@
 #define MyDiary_PrefixHeader_pch
 
 #import <Masonry.h>
+#import <AFNetworking.h>
 #import "Tool.h"
 
 #define kScreenWidth ([[UIScreen mainScreen] bounds].size.width)
