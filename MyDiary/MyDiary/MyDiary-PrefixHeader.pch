@@ -12,6 +12,7 @@
 #import <Masonry.h>
 #import <AFNetworking.h>
 #import "Tool.h"
+#import <Realm/Realm.h>
 
 #define kScreenWidth ([[UIScreen mainScreen] bounds].size.width)
 #define kScreenHeight ([[UIScreen mainScreen] bounds].size.height)
