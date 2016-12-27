@@ -34,32 +34,47 @@
     [self initWithView];
     [self initLocationService];
     [self initWithDate];
-    [self createDataBaseWithName:@"MyDiary"];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        RLMRealm *realm = [RLMRealm defaultRealm];
-        [realm transactionWithBlock:^{
-            RLMData *data = [[RLMData alloc]init];
-            data.titleName = @"Merry";
-            data.diaryContent = @"11111";
-            data.diaryTime = [NSDate dateWithTimeIntervalSinceNow:0];
-            data.diaryWeek = @"Fri";
-            data.diaryNumber = @"26";
-            data.diaryWeather = @"晴";
-            [realm addObject: data];
-            [realm commitWriteTransaction];
-        }];
-    });
+    
+    //增
+//    [self createDataBaseWithName:@"MyDiary"];
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        RLMRealm *realm = [RLMRealm defaultRealm];
+//        [realm transactionWithBlock:^{
+//            RLMData *data = [[RLMData alloc]init];
+//            data.titleName = @"Merry";
+//            data.diaryContent = @"11111";
+//            data.diaryTime = [NSDate dateWithTimeIntervalSinceNow:0];
+//            data.diaryWeek = @"Fri";
+//            data.diaryNumber = @"26";
+//            data.diaryWeather = @"晴";
+//            [realm addObject: data];
+//            [realm commitWriteTransaction];
+//        }];
+//    });
+
+    //删除
 //    RLMRealm *realm = [RLMRealm defaultRealm];
 //    [realm transactionWithBlock:^{
 //        [realm deleteAllObjects];
 //        [realm commitWriteTransaction];
 //    }];
 
-    RLMResults *tempArray = [RLMData allObjects];
-    for (RLMData *data in tempArray) {
-        NSLog(@"titleName:%@,diaryContent:%@,diaryTime:%@,diaryWeek:%@,diaryNumber:%@,diaryWeather:%@",data.titleName,data.diaryContent,data.diaryTime,data.diaryWeek,data.diaryNumber,data.diaryWeather);
-    }
+    //查询
+//    RLMResults *tempArray = [RLMData allObjects];
+//    for (RLMData *data in tempArray) {
+//        NSLog(@"titleName:%@,diaryContent:%@,diaryTime:%@,diaryWeek:%@,diaryNumber:%@,diaryWeather:%@",data.titleName,data.diaryContent,data.diaryTime,data.diaryWeek,data.diaryNumber,data.diaryWeather);
+//    }
 
+    //修改
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm transactionWithBlock:^{
+        //获得对象
+        RLMResults *result = [RLMData allObjects];
+        //获得第一个对象
+        RLMData *data = [result objectAtIndex:0];
+        data.diaryTime = [NSDate dateWithTimeIntervalSinceNow:0];
+        [realm commitWriteTransaction];
+    }];
 }
 
 - (void)initWithDate{
