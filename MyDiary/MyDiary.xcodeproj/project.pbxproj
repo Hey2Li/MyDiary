@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C1AE6FE1E12559400BF4682 /* WriteDiaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1AE6FD1E12559400BF4682 /* WriteDiaryViewController.m */; };
 		1C1BA3D11DFFCDCF00D9F95F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1BA3D01DFFCDCF00D9F95F /* main.m */; };
 		1C1BA3D41DFFCDCF00D9F95F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1BA3D31DFFCDCF00D9F95F /* AppDelegate.m */; };
 		1C1BA3D71DFFCDCF00D9F95F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1BA3D61DFFCDCF00D9F95F /* ViewController.m */; };
@@ -66,6 +67,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1C1AE6FC1E12559400BF4682 /* WriteDiaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WriteDiaryViewController.h; sourceTree = "<group>"; };
+		1C1AE6FD1E12559400BF4682 /* WriteDiaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WriteDiaryViewController.m; sourceTree = "<group>"; };
 		1C1BA3CC1DFFCDCF00D9F95F /* MyDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C1BA3D01DFFCDCF00D9F95F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1C1BA3D21DFFCDCF00D9F95F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -274,6 +277,8 @@
 				1C1BA4141DFFD5D100D9F95F /* DiaryViewController.m */,
 				1C1BA42D1E03C7DB00D9F95F /* EditDiaryViewController.h */,
 				1C1BA42E1E03C7DB00D9F95F /* EditDiaryViewController.m */,
+				1C1AE6FC1E12559400BF4682 /* WriteDiaryViewController.h */,
+				1C1AE6FD1E12559400BF4682 /* WriteDiaryViewController.m */,
 				1C4212051E10EC3900C0A6A9 /* RLMData.h */,
 				1C4212061E10EC3900C0A6A9 /* RLMData.m */,
 			);
@@ -547,6 +552,7 @@
 			files = (
 				1C4211FC1E0E86FD00C0A6A9 /* LTHTTPSessionManager.m in Sources */,
 				1C1BA42F1E03C7DB00D9F95F /* EditDiaryViewController.m in Sources */,
+				1C1AE6FE1E12559400BF4682 /* WriteDiaryViewController.m in Sources */,
 				1C4211FF1E0E875E00C0A6A9 /* MDHTTPManager.m in Sources */,
 				1C1BA4151DFFD5D100D9F95F /* DiaryViewController.m in Sources */,
 				1C1BA41E1DFFD69C00D9F95F /* BaseNaviViewController.m in Sources */,
