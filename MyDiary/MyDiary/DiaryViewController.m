@@ -9,27 +9,40 @@
 #import "DiaryViewController.h"
 #import "DiaryTableViewCell.h"
 #import "EditDiaryViewController.h"
+#import "WriteDiaryViewController.h"
+#import "RLMData.h"
 
 @interface DiaryViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UISegmentedControl *segControl;
 @property (nonatomic, strong) UILabel *naviTitle;
 @property (nonatomic, strong) UITableView *myTableView;
+@property (nonatomic, strong) RLMResults *dataArray;
 
 @end
 
 @implementation DiaryViewController
 @synthesize segControl;
-
+- (RLMResults *)dataArray{
+    if (!_dataArray) {
+        _dataArray  =[RLMData allObjects];
+    }
+    return _dataArray;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initWithNavi];
     [self initWithView];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(myTableViewReloadData) name:@"reloadDataWithDiaryVC" object:nil];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationItem.hidesBackButton = YES;
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBarHidden = NO;
+    [self myTableViewReloadData];
+}
+- (void)myTableViewReloadData{
+    [_myTableView reloadData];
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -94,6 +107,7 @@
     
     UIButton *writeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [writeBtn setImage:[UIImage imageNamed:@"diaryInfopen"] forState:UIControlStateNormal];
+    [writeBtn addTarget:self action:@selector(writeDiary) forControlEvents:UIControlEventTouchUpInside];
     [menuView addSubview:writeBtn];
     [writeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(homeBtn.mas_right);
@@ -140,6 +154,11 @@
     
     [myTabelView registerNib:[UINib nibWithNibName:@"DiaryTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"cell"];
 }
+- (void)writeDiary{
+    WriteDiaryViewController *vc = [WriteDiaryViewController new];
+    vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [self presentViewController:vc animated:YES completion:nil];
+}
 - (void)backHome:(UIButton *)btn{
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -150,7 +169,7 @@
     return 88;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
+    return self.dataArray.count;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 1;
@@ -166,9 +185,16 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     DiaryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    cell.weekLabel.text = @"Fri";
-    cell.titleLabel.text = @"君の名は。";
-    cell.detailLabel.text = @"你的名字";
+    RLMData *data = self.dataArray[indexPath.section];
+    cell.weekLabel.text = [data.diaryWeek substringToIndex:3] ;
+    cell.titleLabel.text = data.titleName;
+    cell.detailLabel.text = data.diaryContent;
+    cell.timeLabel.text = data.diaryTime;
+    cell.dateLabel.text = data.diaryNumber;
+    __weak typeof(self) weakSelf = self;
+    weakSelf.tableReloadData =^{
+        [weakSelf.myTableView reloadData];
+    };
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

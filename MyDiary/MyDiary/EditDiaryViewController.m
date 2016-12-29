@@ -34,47 +34,6 @@
     [self initWithView];
     [self initLocationService];
     [self initWithDate];
-    
-    //增
-//    [self createDataBaseWithName:@"MyDiary"];
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        RLMRealm *realm = [RLMRealm defaultRealm];
-//        [realm transactionWithBlock:^{
-//            RLMData *data = [[RLMData alloc]init];
-//            data.titleName = @"Merry";
-//            data.diaryContent = @"11111";
-//            data.diaryTime = [NSDate dateWithTimeIntervalSinceNow:0];
-//            data.diaryWeek = @"Fri";
-//            data.diaryNumber = @"26";
-//            data.diaryWeather = @"晴";
-//            [realm addObject: data];
-//            [realm commitWriteTransaction];
-//        }];
-//    });
-
-    //删除
-//    RLMRealm *realm = [RLMRealm defaultRealm];
-//    [realm transactionWithBlock:^{
-//        [realm deleteAllObjects];
-//        [realm commitWriteTransaction];
-//    }];
-
-    //查询
-//    RLMResults *tempArray = [RLMData allObjects];
-//    for (RLMData *data in tempArray) {
-//        NSLog(@"titleName:%@,diaryContent:%@,diaryTime:%@,diaryWeek:%@,diaryNumber:%@,diaryWeather:%@",data.titleName,data.diaryContent,data.diaryTime,data.diaryWeek,data.diaryNumber,data.diaryWeather);
-//    }
-
-    //修改
-    RLMRealm *realm = [RLMRealm defaultRealm];
-    [realm transactionWithBlock:^{
-        //获得对象
-        RLMResults *result = [RLMData allObjects];
-        //获得第一个对象
-        RLMData *data = [result objectAtIndex:0];
-        data.diaryTime = [NSDate dateWithTimeIntervalSinceNow:0];
-        [realm commitWriteTransaction];
-    }];
 }
 
 - (void)initWithDate{
@@ -315,28 +274,7 @@
 - (void)backBtn{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-- (void)createDataBaseWithName:(NSString *)databaseName{
-    NSArray *docPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *path = [docPath objectAtIndex:0];
-    NSString *filePath = [path stringByAppendingPathComponent:databaseName];
-    NSLog(@"数据库目录= %@",filePath);
-    
-    RLMRealmConfiguration *config  =[RLMRealmConfiguration defaultConfiguration];
-    config.fileURL = [NSURL URLWithString:filePath];
-    /*
-     objectClasses这个属性是用来控制对哪个类能够存储在指定 Realm 数据库中做出限制。例如，如果有两个团队分别负责开发您应用中的不同部分，并且同时在应用内部使用了 Realm 数据库，那么您肯定不希望为它们协调进行数据迁移您可以通过设置RLMRealmConfiguration的 objectClasses属性来对类做出限制。objectClasses一般可以不用设置。
-    */
-//    config.objectClasses = @[self.class, self.class];
-    config.readOnly = NO;
-    int currentVersion = 1.0;
-    config.schemaVersion = currentVersion;
-    
-    config.migrationBlock = ^(RLMMigration *migration, uint64_t oldSchemaVersion){
-        if (oldSchemaVersion < currentVersion) {
-            //
-        }
-    };
-}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

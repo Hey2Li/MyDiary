@@ -16,6 +16,6 @@
 //}
 //设置默认值
 + (NSDictionary *)defaultPropertyValues{
-    return @{@"titleName":@"name",@"diaryContent":@"diaryContent",@"diaryTime":[NSDate dateWithTimeIntervalSinceNow:0],@"diaryWeather":@"小雨",@"diaryNumber":@"23",@"diaryWeek":@"Friday"};
+    return @{@"titleName":@"name",@"diaryContent":@"diaryContent",@"diaryTime":@"diaryTime",@"diaryWeather":@"小雨",@"diaryNumber":@"23",@"diaryWeek":@"Friday"};
 }
 @end

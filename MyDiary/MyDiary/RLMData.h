@@ -14,7 +14,7 @@
  */
 @property NSString *titleName;
 @property NSString *diaryContent;
-@property NSDate *diaryTime;
+@property NSString *diaryTime;
 @property NSString *diaryWeather;
 @property NSString *diaryNumber;
 @property NSString *diaryWeek;
