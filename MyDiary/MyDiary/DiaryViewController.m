@@ -191,10 +191,6 @@
     cell.detailLabel.text = data.diaryContent;
     cell.timeLabel.text = data.diaryTime;
     cell.dateLabel.text = data.diaryNumber;
-    __weak typeof(self) weakSelf = self;
-    weakSelf.tableReloadData =^{
-        [weakSelf.myTableView reloadData];
-    };
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
