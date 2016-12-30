@@ -34,13 +34,15 @@
     [self initWithView];
     [self initLocationService];
     [self initWithDate];
+    
 }
 
 - (void)initWithDate{
-    self.dateLabel.text = [NSString stringWithFormat:@"%ld",(long)[Tool day]];
+    
+    self.dateLabel.text = self.data.diaryNumber;
     self.monthLabel.text = [Tool montn];
-    self.weekLabel.text = [Tool weekday];
-    self.timeLabel.text = [Tool time];
+    self.weekLabel.text = self.data.diaryWeek;
+    self.timeLabel.text = self.data.diaryTime;
 }
 - (void)initWithView{
     self.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];

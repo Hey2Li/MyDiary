@@ -129,6 +129,9 @@
     }];
 }
 - (void)saveDiary{
+    if (!(_titleTextField.text.length > 0) && !(_subTextView.text.length > 0)) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
     //增x
         [self createDataBaseWithName:@"MyDiary"];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -144,8 +147,9 @@
                 [realm addObject: data];
                 [realm commitWriteTransaction];
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self dismissViewControllerAnimated:YES completion:nil];
-                    [[NSNotificationCenter defaultCenter]postNotificationName:@"reloadDataWithDiaryVC" object:nil];
+                    [self dismissViewControllerAnimated:YES completion:^{
+                          [[NSNotificationCenter defaultCenter]postNotificationName:@"reloadDataWithDiaryVC" object:nil];
+                    }];
                 });
             }];
         });

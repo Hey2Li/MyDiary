@@ -28,8 +28,26 @@
     }
     return _dataArray;
 }
+- (UITableView *)myTableView{
+    if (!_myTableView) {
+        _myTableView = [UITableView new];
+        _myTableView.delegate = self;
+        _myTableView.dataSource = self;
+        _myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _myTableView.backgroundView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"theme_bg_taki"]];
+        [self.view addSubview:_myTableView];
+        [_myTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.view.mas_left);
+            make.right.equalTo(self.view.mas_right);
+            make.top.equalTo(self.view.mas_top).offset(40);
+            make.bottom.equalTo(self.view.mas_bottom).offset(-50);
+        }];
+    }
+    return _myTableView;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.dataArray = [RLMData allObjects];
     [self initWithNavi];
     [self initWithView];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(myTableViewReloadData) name:@"reloadDataWithDiaryVC" object:nil];
@@ -39,10 +57,9 @@
     self.navigationItem.hidesBackButton = YES;
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBarHidden = NO;
-    [self myTableViewReloadData];
 }
 - (void)myTableViewReloadData{
-    [_myTableView reloadData];
+     [_myTableView reloadData];
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -139,20 +156,7 @@
         make.right.equalTo(menuView.mas_right);
     }];
     
-    UITableView *myTabelView = [UITableView new];
-    myTabelView.delegate = self;
-    myTabelView.dataSource = self;
-    myTabelView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    myTabelView.backgroundView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"theme_bg_taki"]];
-    [self.view addSubview:myTabelView];
-    [myTabelView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view.mas_left);
-        make.right.equalTo(self.view.mas_right);
-        make.top.equalTo(self.view.mas_top).offset(40);
-        make.bottom.equalTo(self.view.mas_bottom).offset(-50);
-    }];
-    
-    [myTabelView registerNib:[UINib nibWithNibName:@"DiaryTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"cell"];
+    [self.myTableView registerNib:[UINib nibWithNibName:@"DiaryTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"cell"];
 }
 - (void)writeDiary{
     WriteDiaryViewController *vc = [WriteDiaryViewController new];
@@ -195,6 +199,8 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     EditDiaryViewController *vc = [EditDiaryViewController new];
+    RLMData *data = self.dataArray[indexPath.section];
+    vc.data = data;
     vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [self presentViewController:vc animated:YES completion:nil];
 }

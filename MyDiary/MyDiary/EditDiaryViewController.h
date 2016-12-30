@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RLMData.h"
 
 @interface EditDiaryViewController : UIViewController
-
+@property (nonatomic, strong) RLMData *data;
 @end

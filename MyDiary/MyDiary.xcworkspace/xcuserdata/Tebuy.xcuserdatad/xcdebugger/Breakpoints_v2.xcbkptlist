@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyDiary/EditDiaryViewController.m"
-            timestampString = "504694064.999219"
+            timestampString = "504779324.096388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "255"
-            endingLineNumber = "255"
+            startingLineNumber = "257"
+            endingLineNumber = "257"
             landmarkName = "-locationManager:didUpdateLocations:"
             landmarkType = "7">
          </BreakpointContent>
@@ -35,13 +35,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MyDiary/WriteDiaryViewController.m"
-            timestampString = "504695914.399477"
+            filePath = "MyDiary/DiaryViewController.m"
+            timestampString = "504761268.570973"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
-            landmarkName = "-saveDiary"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
+            landmarkName = "-numberOfSectionsInTableView:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -52,11 +52,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyDiary/DiaryViewController.m"
-            timestampString = "504696038.894666"
+            timestampString = "504761268.570973"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
             landmarkName = "-myTableViewReloadData"
             landmarkType = "7">
          </BreakpointContent>
