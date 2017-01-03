@@ -225,7 +225,6 @@
         // 设置定位权限仅iOS8以上有意义,而且iOS8以上必须添加此行代码
         [_locationManager requestWhenInUseAuthorization];//前台定位
     }
-
 }
 #pragma mark LoactionDelegate
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations{
