@@ -23,7 +23,8 @@
 @property (nonatomic, strong) UILabel *monthLabel;
 @property (nonatomic, strong) NSArray *monthArray;
 @property (nonatomic, strong) UIButton *weatherBtn;
-
+@property (nonatomic, strong) UITextField *titleTextfiled;
+@property (nonatomic, strong) UITextView *textView;
 @end
 
 @implementation EditDiaryViewController
@@ -43,6 +44,8 @@
     self.monthLabel.text = [Tool montn];
     self.weekLabel.text = self.data.diaryWeek;
     self.timeLabel.text = self.data.diaryTime;
+    self.titleTextfiled.text = self.data.titleName;
+    self.textView.text = self.data.diaryContent;
 }
 - (void)initWithView{
     self.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];
@@ -166,6 +169,7 @@
         make.top.equalTo(addressBtn.mas_bottom);
         make.height.equalTo(@50);
     }];
+    self.titleTextfiled = titleTextfiled;
     
     UITextView *textView = [UITextView new];
     textView.font = [UIFont systemFontOfSize:18];
@@ -177,6 +181,7 @@
         make.top.equalTo(titleTextfiled.mas_bottom);
         make.bottom.equalTo(maskView.mas_bottom).offset(-50);
     }];
+    self.textView = textView;
     
     UIButton *moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [moreBtn setImage:[UIImage imageNamed:@"diaryInfomore"] forState:UIControlStateNormal];
@@ -273,7 +278,15 @@
 
 }
 - (void)backBtn{
-    [self dismissViewControllerAnimated:YES completion:nil];
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm transactionWithBlock:^{
+        self.data.diaryNumber = self.dateLabel.text;
+        self.data.diaryWeek = self.monthLabel.text;
+        self.data.diaryWeek = self.weekLabel.text;
+        self.data.diaryTime = self.timeLabel.text;
+        [realm commitWriteTransaction];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
