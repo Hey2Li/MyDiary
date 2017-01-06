@@ -184,6 +184,7 @@
     self.textView = textView;
     
     UIButton *moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [moreBtn addTarget:self action:@selector(saveClick:) forControlEvents:UIControlEventTouchUpInside];
     [moreBtn setImage:[UIImage imageNamed:@"diaryInfomore"] forState:UIControlStateNormal];
     [maskView addSubview:moreBtn];
     [moreBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -212,6 +213,9 @@
         make.top.equalTo(writeBtn.mas_top);
         make.bottom.equalTo(writeBtn.mas_bottom);
     }];
+}
+- (void)saveClick:(UIButton *)btn{
+    
 }
 - (void)initLocationService{
     _locationManager = [[CLLocationManager alloc]init];
